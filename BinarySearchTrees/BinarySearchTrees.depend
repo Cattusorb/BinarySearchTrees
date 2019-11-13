@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1573576409 source:c:\users\magic\desktop\college\fall 2019\algorithms & data structures\binarysearchtrees\tree_tests.c
+	"tree_tests.h"
+
+1573576420 c:\users\magic\desktop\college\fall 2019\algorithms & data structures\binarysearchtrees\tree_tests.h
+	"bst.h"
+
+1573576362 c:\users\magic\desktop\college\fall 2019\algorithms & data structures\binarysearchtrees\bst.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+
+1573659865 source:c:\users\magic\desktop\college\fall 2019\algorithms & data structures\binarysearchtrees\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tree_tests.h"
+
+1573660603 source:c:\users\magic\desktop\college\fall 2019\algorithms & data structures\binarysearchtrees\bst.c
+	"bst.h"
+
