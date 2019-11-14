@@ -282,7 +282,7 @@ void transplant(Tree* tree, TreeNode* u, TreeNode* v) {
         return;
     }
 
-	if (u->parent == NULL)
+    if (u->parent == NULL)
     {
         tree->root = v;
     } else if (u = u->parent->left)
@@ -326,7 +326,6 @@ bool tree_delete(Tree* tree, const void* key) {
         return false;
     }
 
-    // Segmentation Fault here
     if (node->left == NULL)
     {
         transplant(tree, node, node->right);
