@@ -211,7 +211,7 @@ bool tree_insert(Tree* tree, const void* data) {
 TreeNode* recursive_search(TreeNode* node, const void* q, int (*compare)(const void*, const void*)) {
 	if (node == NULL || q == NULL)
     {
-        return false;
+        return NULL;
     }
 
     if (compare(q, node->key) < 0)
@@ -222,7 +222,7 @@ TreeNode* recursive_search(TreeNode* node, const void* q, int (*compare)(const v
         return recursive_search(node->right, q, compare);
     } else
     {
-        return true;
+        return node;
     }
 
 	return NULL;
@@ -279,7 +279,7 @@ TreeNode* tree_maximum(TreeNode* node) {
 void transplant(Tree* tree, TreeNode* u, TreeNode* v) {
     if (tree == NULL)
     {
-        return false;
+        return;
     }
 
 	if (u->parent == NULL)
@@ -298,7 +298,8 @@ void transplant(Tree* tree, TreeNode* u, TreeNode* v) {
         v->parent = u->parent;
     }
 
-    destroy_subtree(u);
+    free(u->key);
+    free(u);
 }
 
 /*
@@ -313,13 +314,19 @@ void transplant(Tree* tree, TreeNode* u, TreeNode* v) {
  *
  */
 bool tree_delete(Tree* tree, const void* key) {
-    TreeNode* node = tree->root;
-
     if (tree == NULL || key == NULL)
     {
         return false;
     }
 
+    TreeNode* node = recursive_search(tree->root, key, tree->compare);
+
+    if (node == NULL)
+    {
+        return false;
+    }
+
+    // Segmentation Fault here
     if (node->left == NULL)
     {
         transplant(tree, node, node->right);
@@ -329,7 +336,7 @@ bool tree_delete(Tree* tree, const void* key) {
     } else
     {
         TreeNode* prev = tree_maximum(node->left);
-        node->key = prev->key;
+        memcpy(node->key, prev->key, tree->data_size);
         transplant(tree, prev, prev->left);
     }
 
